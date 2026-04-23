@@ -19,6 +19,14 @@
               <option v-for="col in columns" :key="col.id" :value="String(col.id)">{{ col.name }}</option>
             </select>
           </div>
+          <div class="form-group">
+            <label>优先级</label>
+            <select v-model="form.priority">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
           <div class="form-actions">
             <button type="button" class="btn btn-ghost" @click="$emit('close')">取消</button>
             <button type="submit" class="btn btn-primary">保存</button>
@@ -44,6 +52,7 @@ const form = reactive({
   title: props.task?.title || '',
   description: props.task?.description || '',
   status: props.task?.status ?? props.columnId ?? null,
+  priority: props.task?.priority || 'medium',
 })
 
 function handleSubmit() {

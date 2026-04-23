@@ -1,5 +1,5 @@
 <template>
-  <div class="kanban-task">
+  <div class="kanban-task" :class="'kanban-task--priority-' + (task.priority || 'medium')">
     <div class="task-content" @click="showForm = true">
       <strong>{{ task.title }}</strong>
       <p v-if="task.description">{{ task.description }}</p>

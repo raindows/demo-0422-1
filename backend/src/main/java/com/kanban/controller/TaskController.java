@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -17,6 +18,7 @@ public class TaskController {
 
     private final TaskMapper taskMapper;
     private final ColumnMapper columnMapper;
+    private static final Set<String> VALID_PRIORITIES = Set.of("high", "medium", "low");
 
     public TaskController(TaskMapper taskMapper, ColumnMapper columnMapper) {
         this.taskMapper = taskMapper;
@@ -30,6 +32,12 @@ public class TaskController {
         }
         if (task.getStatus() != null && columnMapper.selectById(task.getStatus()) == null) {
             throw new BadRequestException("status column does not exist");
+        }
+        if (task.getPriority() != null && !VALID_PRIORITIES.contains(task.getPriority())) {
+            throw new BadRequestException("priority must be one of: high, medium, low");
+        }
+        if (task.getPriority() == null) {
+            task.setPriority("medium");
         }
         taskMapper.insert(task);
         return ResponseEntity.status(HttpStatus.CREATED).body(task);
@@ -51,6 +59,9 @@ public class TaskController {
         }
         if (task.getStatus() != null && columnMapper.selectById(task.getStatus()) == null) {
             throw new BadRequestException("status column does not exist");
+        }
+        if (task.getPriority() != null && !VALID_PRIORITIES.contains(task.getPriority())) {
+            throw new BadRequestException("priority must be one of: high, medium, low");
         }
         task.setId(id);
         taskMapper.update(task);

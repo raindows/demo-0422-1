@@ -335,6 +335,10 @@ body {
 
 .kanban-task:last-child { margin-bottom: 0; }
 
+.kanban-task--priority-high { border-left: 3px solid #F43F5E; }
+.kanban-task--priority-medium { border-left: 3px solid #5E3BEE; }
+.kanban-task--priority-low { border-left: 3px solid #3B82F6; }
+
 .task-content strong {
   display: block;
   font-size: 13px;

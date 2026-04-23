@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kanban.mapper.TaskMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tasks (title, description, status) VALUES (#{title}, #{description}, #{status})
+    </insert>
+
+    <select id="selectAll" resultType="com.kanban.model.Task">
+        SELECT id, title, description, status FROM tasks
+    </select>
+
+    <select id="selectByStatus" resultType="com.kanban.model.Task">
+        SELECT id, title, description, status FROM tasks WHERE status = #{status}
+    </select>
+
+    <select id="selectById" resultType="com.kanban.model.Task">
+        SELECT id, title, description, status FROM tasks WHERE id = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE tasks SET title = #{title}, description = #{description}, status = #{status} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM tasks WHERE id = #{id}
+    </delete>
+
+    <update id="nullifyStatusByColumnId">
+        UPDATE tasks SET status = NULL WHERE status = #{columnId}
+    </update>
+
+</mapper>

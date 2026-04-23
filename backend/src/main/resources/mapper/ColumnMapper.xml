@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kanban.mapper.ColumnMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO columns (name, position) VALUES (#{name}, #{position})
+    </insert>
+
+    <select id="selectAll" resultType="com.kanban.model.Column">
+        SELECT id, name, position FROM columns ORDER BY position ASC
+    </select>
+
+    <select id="selectById" resultType="com.kanban.model.Column">
+        SELECT id, name, position FROM columns WHERE id = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE columns SET name = #{name}, position = #{position} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM columns WHERE id = #{id}
+    </delete>
+
+</mapper>

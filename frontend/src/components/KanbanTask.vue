@@ -4,7 +4,9 @@
       <strong>{{ task.title }}</strong>
       <p v-if="task.description">{{ task.description }}</p>
     </div>
-    <button class="btn-icon btn-delete" title="删除任务" @click.stop="handleDelete">&times;</button>
+    <button class="btn-icon btn-delete" title="删除任务" @click.stop="handleDelete">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
     <TaskForm
       v-if="showForm"
       :task="task"

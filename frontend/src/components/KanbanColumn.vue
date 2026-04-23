@@ -2,9 +2,9 @@
   <div class="kanban-column">
     <div class="column-header">
       <h3>{{ column.name }}</h3>
-      <div class="column-actions">
-        <button class="btn-icon" title="删除列" @click="handleDelete">&times;</button>
-      </div>
+      <button class="btn-icon" title="删除列" @click="handleDelete">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      </button>
     </div>
     <div class="column-body">
       <KanbanTask
@@ -14,9 +14,13 @@
         :columns="columns"
         @refresh="loadTasks"
       />
+      <div v-if="tasks.length === 0" class="column-empty">暂无任务</div>
     </div>
     <div class="column-footer">
-      <button class="btn btn-sm" @click="showTaskForm = true">+ 添加任务</button>
+      <button class="btn btn-add-task" @click="showTaskForm = true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        添加任务
+      </button>
     </div>
     <TaskForm
       v-if="showTaskForm"
